@@ -4,7 +4,8 @@
   "description": "backend for journal ios app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/Suchwinder/Journal_Backend#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6",
+    "path": "^0.12.7"
   }
 }
