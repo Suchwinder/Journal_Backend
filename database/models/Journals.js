@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../index');
 
-const StudySession = db.define ('studySession', {
+const Journals = db.define ('journals', {
     id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -19,4 +19,4 @@ const StudySession = db.define ('studySession', {
     }
 })
 
-module.exports = StudySession;
+module.exports = Journals;
