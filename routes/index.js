@@ -12,4 +12,10 @@
 const express = require('express');
 const router = express.Router();
 
+const userRouter = require('./UserController');
+const journalRouter = require('./JournalController');
+
+router.use('/user', userRouter);
+router.use('/sessions', journalRouter);
+
 module.exports = router;
