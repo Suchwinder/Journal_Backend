@@ -24,7 +24,7 @@ function getAllJournals(req, res, next) {
 
 function addJournalEntry(req, res, next) {
     Journals.create(req.body)
-    .then((newJournalEntry)=>res.status(201).json(newNote))
+    .then((newJournalEntry)=>res.status(201).json(newJournalEntry))
     .catch(err=>next(err));
 };
 
