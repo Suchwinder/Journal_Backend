@@ -13,7 +13,7 @@ const express = require('express');
 const router = express.Router();
 
 const userRouter = require('./UserController');
-const journalRouter = require('./JournalController');
+const journalRouter = require('./journalController');
 
 router.use('/user', userRouter);
 router.use('/journal', journalRouter);
