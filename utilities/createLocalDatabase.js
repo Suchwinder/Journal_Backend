@@ -16,20 +16,20 @@ const pgtools = require('pgtools');
 /**
  * Getting private hidden dbname for this app
  */
-const { dbname } = require('../config')
-
+// const { dbname } = require('../config')
+const config = require('../config')
 /**
  * Set up configurations to connect/create database
  */
-const config = {
-  user: 'postgres',
-  host: 'localhost',
-  port: 5432, //this is why CORS doesnt occur on the database https://stackoverflow.com/questions/36958999/cors-is-it-a-client-side-thing-a-server-side-thing-or-a-transport-level-thin
-  password: ''
-}
+// const config = {
+//   user: 'postgres',
+//   host: 'localhost',
+//   port: 5432, //this is why CORS doesnt occur on the database https://stackoverflow.com/questions/36958999/cors-is-it-a-client-side-thing-a-server-side-thing-or-a-transport-level-thin
+//   password: ''
+// }
 
-const createLocalDatabase = () => pgtools.createdb(config, dbname, function (err, res) {
-  console.log(`Attempting to create the database: ${dbname}!`);
+const createLocalDatabase = () => pgtools.createdb(config, config.dbname, function (err, res) {
+  console.log(`Attempting to create the database: ${config.dbname}!`);
   if (err) {
     console.error(err.message);
     // removal in case the database already exists locally
@@ -37,7 +37,7 @@ const createLocalDatabase = () => pgtools.createdb(config, dbname, function (err
   }
   else{
     console.log(res);
-    console.log(`Successfully created the database: ${dbname}!`);
+    console.log(`Successfully created the database: ${config.dbname}!`);
   }
   // This I believe deletes the database
   // pgtools.dropdb(config, dbname, function (err, res) {

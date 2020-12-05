@@ -3,7 +3,9 @@
 /**
  * Getting private hidden dbname for this app
  */
-const { dbname } = require('../config')
+// const { dbname } = require('../config')
+
+const config = require('../config')
 
 /**
  * This is to import the sequalize ORM, sequalize lets us write queries is JS sysntax
@@ -11,7 +13,8 @@ const { dbname } = require('../config')
  * for setup info: https://sequelize.org/master/manual/getting-started.html
  */
 const { Sequelize } = require('sequelize');
-const db = new Sequelize(`postgres://localhost:5432/${dbname}`, {
+// const db = new Sequelize(`postgres://localhost:5432/${dbname}`, {
+    const db = new Sequelize(config.dburl, {
     // logging: false // no need to log every query
 }); // connecting to db using SEQUALIZE object instantiation
 
