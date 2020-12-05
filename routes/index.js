@@ -16,6 +16,6 @@ const userRouter = require('./UserController');
 const journalRouter = require('./JournalController');
 
 router.use('/user', userRouter);
-router.use('/sessions', journalRouter);
+router.use('/journal', journalRouter);
 
 module.exports = router;
