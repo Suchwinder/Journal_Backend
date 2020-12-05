@@ -161,11 +161,11 @@ const configureApp = async () => {
 const bootApp = async () => {
   await prepareDatabase();
   await configureApp();
+
+  // need a port to listen to, front end is 3000 so I will use 3001
+  port = process.env.PORT||3001;
+  app.listen(port, ()=> console.log(`Listening on port: ${port}`)); 
 };
 
 // set up application
 bootApp();
-
-// need a port to listen to, front end is 3000 so I will use 3001
-port = process.env.PORT||3001;
-app.listen(port, ()=> console.log(`Listening on port: ${port}`)); 
