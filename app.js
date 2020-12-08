@@ -129,7 +129,7 @@ const configureApp = async () => {
     try {
       // Check if there is a user_id stored in our session, meaning someone is logged in
       if(req.session.user_id){
-        const user = await User.findByPk(req.session.user_id);
+        const user = await User.findOne({ where: { username: req.session.user_id} });
         // create a user key in the request object and store it
         // this middle ware function isnt necessary, based on my understaind
         // but its use is good for undesratnding how the express server is set up

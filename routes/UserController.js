@@ -17,13 +17,18 @@ const createUser = async (req, res) => {
     if(!req.body.password || req.body.password.length === 0) {
       return res.status(400).json({error: "Please enter a password"});
     }
+    let person_already_exists = await User.findOne({ where: { username: req.body.username} })
+
+    if(person_already_exists) {
+      return res.status(400).json({error: "User Already Exists"});
+    }
     req.body.password = bcrypt.hashSync(req.body.password, 10); // encrypt password 
     const user = await User.create(req.body); // create user with encrypted password and remainder of body
     // so by creating an express session, we are checking the valididty of if the client is coming from the same browser, 
     // and we store the id of the user (in this case email) in our session, so we specifically know who the user is. Otherwaise
     // if we dont store it, we know the client using our app is the same one, but we dont specifically know who it is.
     // this happens on every request. This is what passport, the module, does as well
-    req.session.user_id = user.email; // adding key: value pair for future requests that require the user to be logged in, basically this is what passport would do 
+    req.session.user_id = user.username; // adding key: value pair for future requests that require the user to be logged in, basically this is what passport would do 
     return res.status(200).json({message: 'User Successfully Created'}); // Successfuly created
   } catch(error) {
     return res.status(400).json({error: "User Already Exists"});
