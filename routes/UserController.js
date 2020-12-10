@@ -47,9 +47,9 @@ const getUser = async (req, res) => {
       return res.status(400).json({error: "Please enter a password"});
     }
     req.body.password = bcrypt.hashSync(req.body.password, 10); // we encrypt password inputted to see if it matches the one existing in the database
-    const user = await User.findByPk(req.body.username);
+    const user = await User.findOne({ where: { username: req.body.username} });
     if(user) {
-      req.session.user_id = user.userId;
+      req.session.user_id = user.username;
       return res.status(200).json({message: 'User logged in'});
     } else {
       throw Error("User doesn't exist");
