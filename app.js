@@ -94,9 +94,9 @@ const prepareDatabase = async () => {
  * more info: https://www.npmjs.com/package/connect-session-sequelize
  * mor info on secret: https://martinfowler.com/articles/session-secret.html#HowToCrackAWeakSessionSecret
  */
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const { User } = require('./database/models') // to use in our middleware in configureApp 
+// const { User } = require('./database/models') // to use in our middleware in configureApp 
 
 // creating a function to be called aynchornously when setting up middleware 
 const configureApp = async () => {
@@ -117,30 +117,30 @@ const configureApp = async () => {
   // decode the cookie based on the secret we have assigned it, and then use the ID to get
   // the data in order to ensure the same user is logged in
   // more info: https://www.npmjs.com/package/express-session, https://flaviocopes.com/express-sessions/
-  app.use(session({
-    secret: 'a bad secret',
-    store: new SequelizeStore({db}),
-    saveUninitialized: false,
-    resave: false, // we support the touch method so per the express-session docs this should be set to false
-    proxy: true // if you do SSL outside of node.
-  }));
+  // app.use(session({
+  //   secret: 'a bad secret',
+  //   store: new SequelizeStore({db}),
+  //   saveUninitialized: false,
+  //   resave: false, // we support the touch method so per the express-session docs this should be set to false
+  //   proxy: true // if you do SSL outside of node.
+  // }));
 
-  app.use(async (req, res, next) => {
-    try {
-      // Check if there is a user_id stored in our session, meaning someone is logged in
-      if(req.session.user_id){
-        const user = await User.findOne({ where: { username: req.session.user_id} });
-        // create a user key in the request object and store it
-        // this middle ware function isnt necessary, based on my understaind
-        // but its use is good for undesratnding how the express server is set up
-        req.user = user;
-      } 
-    } catch(error) {
-      console.log(error);
-    } finally {
-      next();
-    }
-  });
+  // app.use(async (req, res, next) => {
+  //   try {
+  //     // Check if there is a user_id stored in our session, meaning someone is logged in
+  //     if(req.session.user_id){
+  //       const user = await User.findOne({ where: { username: req.session.user_id} });
+  //       // create a user key in the request object and store it
+  //       // this middle ware function isnt necessary, based on my understaind
+  //       // but its use is good for undesratnding how the express server is set up
+  //       req.user = user;
+  //     } 
+  //   } catch(error) {
+  //     console.log(error);
+  //   } finally {
+  //     next();
+  //   }
+  // });
 
   // Use the below console.log in order to see the call stack and how next passes down into the next layer on the stack
   // which in this case is our router, that has all the api functions
