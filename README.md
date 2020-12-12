@@ -1,6 +1,6 @@
 # Journal_Backend
 
-### Instal requirements
+### Install requirements
 ```
 npm i
 ```
